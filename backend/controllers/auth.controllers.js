@@ -32,17 +32,11 @@ const userLogin=async(req ,res)=>{
         }
         const token= await generateToken({id:user._id})
        
-
-
          res.cookie("token",token, {
             httpOnly:true,
             maxAge:7*24*60*60*1000,
             sameSite: "None",   
-            secure:true 
-        })
-       
-
-
+    })
         return res.json({status:true,message:"user in logged in",user})
         
     } catch (error) {
