@@ -2,9 +2,15 @@ import  User  from "../models/user.models.js"
 import nodemailer from 'nodemailer'
 import { sendOtp } from "../utils/sendOtp.js"
 import bcrypt from 'bcrypt'
+
+
+
 const getCurrentUser=async(req ,res)=>{
    
     try {
+      if(!req.userId){
+        return res.status(401).json({success:false,message:"user not authenticated"})
+      }
         const user=await User.findById(req.userId).select("-password").populate('listing').populate('booking')
          if(!user){
           return  res.status(404).json({success:false,message:"user does not found"})

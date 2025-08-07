@@ -38,8 +38,8 @@ const AuthContext = ({children}) => {
          
       } catch (error) {
         setUserData(null)
-        toast.error(error.message)
-        console.log(error)
+  
+        console.log('Auth check failed',error?.response?.data?.message)
       }
     }
     const getAllListing=async()=>{
