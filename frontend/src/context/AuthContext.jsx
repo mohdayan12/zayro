@@ -37,9 +37,16 @@ const AuthContext = ({children}) => {
          }
          
       } catch (error) {
-        setUserData(null)
-  
-        console.log('Auth check failed',error?.response?.data?.message)
+         const message = error?.response?.data?.message;
+
+    if (error.response?.status === 401 && message === "User does not have token") {
+      // Expected: user is not logged in yet
+      setUserData(null);
+      console.log("User not logged in yet — no token found");
+    } else {
+      console.error("Auth check failed:", message || error.message);
+      setUserData(null);
+    }
       }
     }
     const getAllListing=async()=>{

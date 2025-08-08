@@ -12,7 +12,7 @@ const isAuth=async(req,res,next)=>{
       const verifytoken=jwt.verify(token,process.env.JWT_SECRET)
      
       req.userId=verifytoken.id
-      next()
+       return next()
     
   } catch (error) {
     console.log(error)
